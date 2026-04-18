@@ -1,5 +1,5 @@
 section .data
-	file:    db "./ft_read_tester.asm", 0
+	file:    db "ft_write_tester.s", 0
 
 section .bss
 	buf:	resb 128
@@ -73,7 +73,6 @@ _start:
 	mov		r10, rax
 
 	mov		rax, 3
-	mov		rdi, rbx
 	syscall
 
 	mov		rdi, buf

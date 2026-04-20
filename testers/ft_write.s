@@ -1,8 +1,10 @@
 section .data
-msg:    db "hello from ft_write", 10, 0
-msg_len equ $ - msg
+
+	msg:    db "hello from ft_write", 10, 0
+	msg_len equ $ - msg
 
 section .text
+
 	global ft_write
 	global _start
 
@@ -22,6 +24,7 @@ ft_write:
 	mov		rax, -1
 
 	.ret:
+	
 		ret
 
 _start:

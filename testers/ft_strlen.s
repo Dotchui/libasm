@@ -1,7 +1,9 @@
 section .data
-msg:    db "hello from ft_strlen", 10, 0
+
+	msg:    db "hello from ft_strlen", 10, 0
 
 section .text
+
 	global ft_strlen
 	global ft_write
 	global _start
@@ -22,6 +24,7 @@ ft_write:
 	mov		rax, -1
 
 	.ret:
+
 		ret
 
 ft_strlen:
@@ -29,12 +32,14 @@ ft_strlen:
 	xor rax, rax
 
 	.loop:
+
 		cmp byte [rdi+rax], 0
 		je .done
 		inc rax
 		jmp .loop
 
 	.done:
+	
 		ret
 
 _start:

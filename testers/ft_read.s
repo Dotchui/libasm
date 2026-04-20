@@ -1,10 +1,13 @@
 section .data
-	file:    db "ft_write_tester.s", 0
+
+	file:    db "ft_write.s", 0
 
 section .bss
+
 	buf:	resb 128
 
 section .text
+
 	global ft_read
 	global ft_write
 	global ft_strlen
@@ -49,12 +52,14 @@ ft_strlen:
 	xor rax, rax
 
 	.loop:
+
 		cmp byte [rdi+rax], 0
 		je .done
 		inc rax
 		jmp .loop
 
 	.done:
+
 		ret
 
 _start:

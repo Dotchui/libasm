@@ -1,6 +1,6 @@
 NAME = exec
 
-SRCS = ft_strdup_tester.s 
+SRCS = ft_atoi_base.s 
 OBJS = $(SRCS:.s=.o)
 BINS = $(SRCS:%.s=%)
 

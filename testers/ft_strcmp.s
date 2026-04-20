@@ -1,8 +1,10 @@
 section .data
-msg1:	db "aoucou", 0
-msg2:	db "coucou", 0
+
+	msg1:	db "aoucou", 0
+	msg2:	db "coucou", 0
 
 section .text
+
 	global ft_strcmp
 	global _start
 
@@ -11,6 +13,7 @@ ft_strcmp:
 	xor rcx, rcx
 
 	.loop:
+
 		mov	al, [rdi+rcx]
 		mov	dl, [rsi+rcx]
 		cmp al, dl
@@ -21,12 +24,14 @@ ft_strcmp:
 		jmp	.loop
 
 	.diff:
+
 		movzx	eax, al
 		movzx	edx, dl
 		sub		eax, edx
 		ret
 
 	.done:
+	
 		xor		eax, eax
 		ret
 

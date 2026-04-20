@@ -1,7 +1,9 @@
 section .data
-msg:    db "hello from ft_strdup", 10, 0
+
+	msg:    db "hello from ft_strdup", 10, 0
 
 section .text
+
 	global ft_write
 	global ft_strlen
 	global ft_strcpy
@@ -25,6 +27,7 @@ ft_write:
 	mov		rax, -1
 
 	.ret:
+
 		ret
 
 ft_strlen:
@@ -32,12 +35,14 @@ ft_strlen:
 	xor rax, rax
 
 	.loop:
+
 		cmp byte [rdi+rax], 0
 		je .done
 		inc rax
 		jmp .loop
 
 	.done:
+
 		ret
 
 ft_strcpy:
@@ -45,6 +50,7 @@ ft_strcpy:
 	xor rcx, rcx
 
 	.loop:
+
 		mov		al, [rsi+rcx]
 		mov		[rdi+rcx], al
 		test	al, al
@@ -53,6 +59,7 @@ ft_strcpy:
 		jmp		.loop
 
 	.done:
+
 		mov		rax, rdi
 		ret
 
@@ -80,6 +87,7 @@ ft_strdup:
 	ret
 
 	.malloc_fail:
+	
 		pop	rbp
 		pop	rbx
 		mov	rax, 0

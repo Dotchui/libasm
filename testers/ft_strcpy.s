@@ -1,8 +1,10 @@
 section .data
-msg1:	db "agougo", 10, 0
-msg2:	db "coucou", 10, 0
+
+	msg1:	db "agougo", 10, 0
+	msg2:	db "coucou", 10, 0
 
 section .text
+
 	global ft_strcpy
 	global ft_write
 	global ft_strlen
@@ -15,12 +17,14 @@ ft_strlen:
 	xor rax, rax
 
 	.loop:
+
 		cmp byte [rdi+rax], 0
 		je .done
 		inc rax
 		jmp .loop
 
 	.done:
+
 		ret
 
 ft_write:
@@ -37,6 +41,7 @@ ft_write:
 	mov		rax, -1
 
 	.ret:
+
 		ret
 
 ft_strcpy:
@@ -44,6 +49,7 @@ ft_strcpy:
 	xor rcx, rcx
 
 	.loop:
+
 		mov		al, [rsi+rcx]
 		mov		[rdi+rcx], al
 		test	al, al
@@ -52,6 +58,7 @@ ft_strcpy:
 		jmp		.loop
 
 	.done:
+	
 		mov		rax, rdi
 		ret
 

@@ -1,24 +1,23 @@
 NAME = exec
 
-SRCS = ft_atoi_base.s 
+SRCS = ft_atoi_base.s
 OBJS = $(SRCS:.s=.o)
 BINS = $(SRCS:%.s=%)
 
 NASM = nasm
 NASM_FLAGS = -f elf64
 CC = gcc
-LDFLAGS = -no-pie -nostartfiles
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	gcc -no-pie -o exec main.c ft_atoi_base.o
 
 %.o: %.s
 	$(NASM) $(NASM_FLAGS) -o $@ $<
 
 %: %.o
-	$(CC) -o $@ $< $(LDFLAGS)
+	gcc -no-pie -o exec main.c ft_atoi_base.o
 
 clean:
 	rm -f $(OBJS)

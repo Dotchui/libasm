@@ -1,13 +1,33 @@
 section .data
 
-	msg:    db "hello from ft_strlen", 0
-	base:	db "10", 0
+	msg:    db "125", 0
+	base:	db "0123456789", 0
 
 section .text
 
-    global ft_strlen
-    global ft_atoi_base
-    global _start
+    global	ft_strlen
+	global	check_ws
+	global	check_dup
+	global	skip_ws
+	global	sign_loop
+	global	find_digit
+    global	ft_atoi_base
+    global	_start
+
+ft_strlen:
+
+	xor rax, rax
+
+	.loop:
+
+		cmp byte [rdi+rax], 0
+		je .done
+		inc rax
+		jmp .loop
+
+	.done:
+	
+		ret
 
 check_ws:
 
@@ -150,8 +170,36 @@ sign_loop:
 
 		ret
 
+find_digit:
+
+	push	r12
+	xor		r11, r11
+
+	.loop:
+
+		mov		r12b, [rsi+r11]
+		test	r12b, r12b
+		jz		.fail
+		cmp		r12b, r8b
+		je		.end
+		inc		r11
+		jmp		.loop
+
+	.fail:
+
+		pop	r12
+		ret
+	
+	.end:
+
+		mov		r12b, 1
+		test	r12b, r12b
+		pop		r12
+		ret
 
 ft_atoi_base:
+
+	push	rbp
 
 	mov		rdx, rdi
 	mov		rdi, rsi
@@ -159,6 +207,7 @@ ft_atoi_base:
 	call	ft_strlen
 	cmp		rax, 2
 	jl		.fail
+	mov		rbp, rax
 
 	call	check_ws
 	cmp		rax, 0
@@ -185,29 +234,21 @@ ft_atoi_base:
 		mov		r8b, [rdi+rdx]
 		test	r8b, r8b
 		jz		.end
-		cmp		r8b, '0'
-		jl		.end
-		cmp		r8b, '9'
-		ja		.end
-		imul	rax, rax, 10
-		sub		r8b, '0'
-		movzx	rcx, r8b
-		add		rax, rcx
+		call	find_digit
+		jz		.end
+		imul	rax, rbp
+		add		rax, r11
 		inc		rdx
 		jmp		.loop
 
 	.end:
 
 		imul	rax, r10
+		pop		rbp
 		ret
 
 	.fail:
 
-		xor rax, rax
+		xor 	rax, rax
+		pop		rbp
 		ret
-
-_start:
-
-    mov		rdi, msg
-	mov		rsi, base
-	call	ft_atoi_base

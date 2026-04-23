@@ -47,11 +47,6 @@ _start:
 	mov		rdi, msg
 	call	ft_strlen
 
-	mov		rdi, 1
-	mov		rsi, msg
-	mov		rdx, rax
-	call	ft_write
-
-	mov		rdi, 0
+	mov		rdi, rax
     mov     rax, 60
     syscall

@@ -1,8 +1,3 @@
-section .data
-
-	msg:    db "125", 0
-	base:	db "0123456789", 0
-
 section .text
 
     global	ft_strlen
@@ -12,7 +7,6 @@ section .text
 	global	sign_loop
 	global	find_digit
     global	ft_atoi_base
-    global	_start
 
 ft_strlen:
 

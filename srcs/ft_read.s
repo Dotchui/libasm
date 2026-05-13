@@ -1,7 +1,3 @@
-section .data
-
-	file:    db "ft_read.s", 0
-
 section .bss
 
 	buf:	resb 128
@@ -9,7 +5,6 @@ section .bss
 section .text
 
 	global ft_read
-	global _start
 
 extern __errno_location
 
@@ -28,25 +23,3 @@ ft_read:
 
 	.ret:
 		ret
-
-_start:
-
-	mov		rax, 2
-	mov		rdi, file
-	mov		rsi, 0
-	mov		rdx, 0
-	syscall
-
-	mov		rdi, rax
-	mov		rsi, buf
-	mov		rdx, 128
-    call    ft_read
-
-	mov		r10, rax
-
-	mov		rax, 3
-	syscall
-
-    mov     rdi, r10
-    mov     rax, 60
-    syscall

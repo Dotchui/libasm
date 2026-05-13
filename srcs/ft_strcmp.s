@@ -1,12 +1,6 @@
-section .data
-
-	msg1:	db "aoucou", 0
-	msg2:	db "coucou", 0
-
 section .text
 
 	global ft_strcmp
-	global _start
 
 ft_strcmp:
 
@@ -34,13 +28,3 @@ ft_strcmp:
 	
 		xor		eax, eax
 		ret
-
-_start:
-
-	mov		rdi, msg1
-	mov		rsi, msg2
-	call	ft_strcmp
-
-    mov     rdi, rax
-    mov     rax, 60
-    syscall

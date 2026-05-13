@@ -182,9 +182,9 @@ void	test_ft_list_sort()
 	}
 }
 
-void	free_node(void *node)
+void	free_data(void *node)
 {
-	free(node);
+	free (node);
 }
 
 void	test_ft_list_remove_if(char c)
@@ -194,7 +194,7 @@ void	test_ft_list_remove_if(char c)
 	for(t_list *cur = begin_list; cur; cur = cur->next)
 		printf("%c ", *(char *)cur->data);
 	printf("\n\n");
-	ft_list_remove_if(&begin_list, &c, void_strcmp, free_node);
+	ft_list_remove_if(&begin_list, &c, void_strcmp, free_data);
 	for(t_list *cur = begin_list; cur; cur = cur->next)
 		printf("%c ", *(char *)cur->data);
 	while (begin_list)

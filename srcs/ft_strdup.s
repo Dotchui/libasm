@@ -1,13 +1,8 @@
-section .data
-
-	msg:    db "hello from ft_strdup", 10, 0
-
 section .text
 
 	global ft_strlen
 	global ft_strcpy
     global ft_strdup
-	global _start
 
 extern malloc
 
@@ -73,14 +68,3 @@ ft_strdup:
 		pop	rbx
 		mov	rax, 0
 		ret
-
-_start:
-
-    mov		rdi, msg
-	sub		rsp, 8
-	call	ft_strdup
-
-	mov     rdi, rax
-    mov     rax, 60
-	add		rsp, 8
-    syscall

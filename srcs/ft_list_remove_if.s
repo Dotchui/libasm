@@ -46,10 +46,12 @@ ft_list_remove_if:
 
     .free_node:
 
+        push    r9
         mov     rdi, [r15]
         call    r14
         mov     rdi, r15
-        call    free
+        call    free wrt ..plt
+        pop     r9
         mov     r15, r9
         jmp     .loop
 

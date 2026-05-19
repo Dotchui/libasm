@@ -42,9 +42,11 @@ check_ws:
     .ok:
 
         mov     rax, 1
+		ret
 
     .fail:
 
+		xor		rax, rax
         ret
 
 check_dup:

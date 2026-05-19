@@ -10,7 +10,7 @@ ft_list_push_front:
 	push	rsi
 
 	mov		rdi, 16
-	call	malloc
+	call	malloc wrt ..plt
 	test	rax, rax
 	je		.done
 

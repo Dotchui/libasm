@@ -1,38 +1,36 @@
 NAME = exec
 
-SRCS = main.c ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s
-S_BONUS = ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_sort.s ft_list_remove_if.s
-OBJS = $(SRCS:.s=.o)
-O_BONUS = $(S_BONUS:.s=o)
-BINS = $(SRCS:%.s=%)
-B_BONUS = $(S_BONUS:%.s=%)
+SRCS = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_sort.s ft_list_remove_if.s
+
+OBJDIR = objs
+OBJS = $(addprefix $(OBJDIR)/, main.o $(SRCS:.s=.o))
 
 NASM = nasm
-NASM_FLAGS = -f elf64
+NASM_FLAGS = -f elf64 -Wall
 CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 
-bonus: $(BONUS)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJS)
-	gcc -no-pie -o $(NAME) $(BINS)
+	gcc -no-pie -Wl,-z,noexecstack -o $(NAME) $(OBJS)
 
-$(BONUS): $(OBJS) $(O_BONUS)
-	gcc -no-pie -o $(NAME) $(BINS) $(B_BONUS)
+$(OBJDIR)/main.o: main.c | $(OBJDIR)
+	$(CC) -c $(CFLAGS) main.c -o $@
 
-%.o: %.s
+$(OBJDIR)/%.o: %.s | $(OBJDIR)
 	$(NASM) $(NASM_FLAGS) -o $@ $<
 
-%: %.o
-	gcc -no-pie -o $(NAME) $(BINS)
-
 clean:
-	rm -f $(OBJS) $(O_BONUS)
+	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -f $(BINS) $(B_BONUS) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.phony: all bonus clean fclean re
+.PHONY: all clean fclean re

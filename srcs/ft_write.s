@@ -2,7 +2,7 @@ section .text
 
 	global ft_write
 
-extern __errno_location
+	extern __errno_location
 
 ft_write:
 

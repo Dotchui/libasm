@@ -1,6 +1,7 @@
 section .text
 
     global ft_list_remove_if
+
     extern free
 
 ft_list_remove_if:

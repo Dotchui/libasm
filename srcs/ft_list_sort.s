@@ -1,59 +1,69 @@
 section .text
 
-    global ft_list_sort
+    global  ft_list_sort
 
 ft_list_sort:
-
     test    rdi, rdi
     je      .done
-
-    mov     rbx, [rdi]
-    test    rbx, rbx
+    mov     rax, [rdi]
+    test    rax, rax
     je      .done
-
+    
     push    rbx
     push    r12
     push    r13
-
+    
+    mov     rbx, rax
     mov     r12, rsi
 
-    .outer:
+.outer:
+    xor     r13b, r13b
+    mov     rdx, rbx
 
-        xor     r13b, r13b
-        mov     rdx, rbx
+.inner:
+    mov     rax, [rdx+8]
+    test    rax, rax
+    je      .outer_check
 
-    .inner:
+    push    rdx
+    push    rax
+    mov     rdi, [rdx]
+    mov     rsi, [rax]
+    call    r12
+    pop     rax
+    pop     rdx
 
-        mov     rax, [rdx+8]
-        test    rax, rax
-        je      .outer_check
+    cmp     eax, 0
+    jle     .no_swap
 
-        mov     rdi, [rdx]
-        mov     rsi, [rax]
-        call    r12
-        cmp     eax, 0
-        jle     .no_swap
+    mov     rcx, [rdx]
+    mov     r8,  [rax]
+    mov     [rdx], r8
+    mov     [rax], rcx
 
-        mov     rcx, [rdx]
-        mov     r8, [rax]
-        mov     [rdx], r8
-        mov     [rax], rcx
-        mov     r13b, 1
+    cmp     rdx, rbx
+    jne     .skip_head_update
+    mov     rbx, rax
+.skip_head_update:
+    mov     r13b, 1
 
-    .no_swap:
+.no_swap:
+    mov     rdx, rax
+    jmp     .inner
 
-        mov     rdx, rax
-        jmp     .inner
+.outer_check:
+    test    r13b, r13b
+    jne     .outer
 
-    .outer_check:
 
-        test    r13b, r13b
-        jne     .outer
+    mov     rax, [rdi]
+    cmp     rax, rbx
+    je      .no_head_change
+    mov     [rdi], rbx
+.no_head_change:
 
-        pop     r13
-        pop     r12
-        pop     rbx
-
-	.done:
-	
-		ret
+    pop     r13
+    pop     r12
+    pop     rbx
+.done:
+    ret

@@ -2,7 +2,7 @@ section .text
 
     global ft_list_push_front
 
-extern malloc
+	extern malloc
 
 ft_list_push_front:
 
@@ -25,6 +25,5 @@ ft_list_push_front:
 
 	.done:
 
-		pop	rsi
-		pop	rdi
+		add	rsp, 16
 		ret

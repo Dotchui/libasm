@@ -1,43 +1,10 @@
 section .text
 
-	global ft_strlen
-	global ft_strcpy
     global ft_strdup
 
-extern malloc
-
-ft_strlen:
-
-	xor rax, rax
-
-	.loop:
-
-		cmp byte [rdi+rax], 0
-		je .done
-		inc rax
-		jmp .loop
-
-	.done:
-
-		ret
-
-ft_strcpy:
-
-	xor rcx, rcx
-
-	.loop:
-
-		mov		al, [rsi+rcx]
-		mov		[rdi+rcx], al
-		test	al, al
-		je		.done
-		inc		rcx
-		jmp		.loop
-
-	.done:
-
-		mov		rax, rdi
-		ret
+	extern ft_strlen
+	extern ft_strcpy
+	extern malloc
 
 ft_strdup:
 	

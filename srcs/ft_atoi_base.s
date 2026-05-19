@@ -1,27 +1,13 @@
 section .text
 
-    global	ft_strlen
 	global	check_ws
 	global	check_dup
 	global	skip_ws
 	global	sign_loop
 	global	find_digit
     global	ft_atoi_base
-
-ft_strlen:
-
-	xor rax, rax
-
-	.loop:
-
-		cmp byte [rdi+rax], 0
-		je .done
-		inc rax
-		jmp .loop
-
-	.done:
-	
-		ret
+    
+	extern	ft_strlen
 
 check_ws:
 

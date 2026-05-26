@@ -208,5 +208,3 @@ int 	main(int argc, char **argv)
 	}
     return (0);
 }
-
-// cc -Wall -Wextra -Werror -Wl,-z,noexecstack main.c libasm.a
